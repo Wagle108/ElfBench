@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
@@ -21,9 +22,17 @@ public WebDriver driver;
 @BeforeSuite
 public void reportConfig() {
 	sparkreporter = new ExtentSparkReporter(Extent_Path+name());
-    reports=new ExtentReports();
-    reports.attachReporter(sparkreporter);
+ 
 }
+
+
+@BeforeClass
+public void reportStart() {
+	reports=new ExtentReports();
+	reports.attachReporter(sparkreporter);
+}
+
+
 @BeforeMethod
 public void browserSetUp(Method method) throws IOException {
 	 testMethodName =method.getName();
